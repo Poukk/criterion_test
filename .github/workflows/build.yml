@@ -1,0 +1,35 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc make
+
+      - name: Build main program
+        run: make
+
+      - name: Check if binary exists
+        run: |
+          if [ -f ./bin/main ]; then
+            echo "✅ Binary compiled successfully"
+            ls -la ./bin/main
+          else
+            echo "❌ Binary not found"
+            exit 1
+          fi
+
+      - name: Run main program
+        run: ./bin/main
