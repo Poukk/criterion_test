@@ -16,3 +16,7 @@ Test(fibonacci, test_fibonacci_five) {
 Test(fibonacci, test_fibonacci_ten) {
     cr_assert_eq(fibonacci(10), 55);
 }
+
+Test(fibonacci, test_fibonacci_failing) {
+    cr_assert_eq(fibonacci(5), 8);
+}
